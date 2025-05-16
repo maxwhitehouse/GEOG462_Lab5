@@ -82,15 +82,3 @@ plt.savefig("ndvi_taxlots_map.png", dpi=300)
 plt.show()
 
 
-
-
-
-# Simple Python script
-
-# Print a greeting
-print("Hello, world!")
-
-# Calculate the sum of the first 10 positive integers
-total = sum(range(1, 11))
-print("The sum of the first 10 positive integers is:", total)
-
