@@ -1,5 +1,5 @@
 # Lab 5 scripts
-
+import os
 
 import msw_lab5_functions as l5
 
@@ -14,6 +14,12 @@ import msw_lab5_functions as l5
 
 # Calculate NDVI and save to and output file
 
+landsat_path = "Landsat_image_corv.tif"  # update with your actual filename
+smart_raster = l5.SmartRaster(landsat_path)
+ndvi = smart_raster.calculate_ndvi()
+ndvi_output_path = "ndvi_output_test1.tif"
+smart_raster.save_raster(ndvi, ndvi_output_path)
+
 
 
 
@@ -27,6 +33,15 @@ import msw_lab5_functions as l5
 
 
 #  Calculate zonal statistics and add to the attribute table of the parcels shapefile
+import importlib
+importlib.reload(l5)
+
+
+vector_path = "Benton_County_TaxLots.shp"  # update with actual shapefile name
+smart_vector = l5.SmartVector(vector_path)
+smart_vector.calculate_zonal_stats(ndvi_output_path)
+smart_vector.save_vector("taxlots_with_ndvi_test1.shp")
+
 
 
 
