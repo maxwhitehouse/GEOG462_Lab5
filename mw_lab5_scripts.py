@@ -5,6 +5,9 @@ import msw_lab5_functions as l5
 
 #  Part 1:
 
+
+print("VSCode is running Python!")
+
 #  Assign a variable to the Landsat file 
 
 
@@ -48,8 +51,35 @@ smart_vector.save_vector("taxlots_with_ndvi_test1.shp")
 #  Part 3: Optional
 #  Use matplotlib to make a map of your census tracts with the average NDVI values
 
+import matplotlib.pyplot as plt
 
+# Optional: set style
+plt.style.use('ggplot')
 
+# Plot the tax lots with NDVI values
+fig, ax = plt.subplots(figsize=(10, 10))
+
+# Plot the GeoDataFrame with NDVI color scale
+smart_vector.gdf.plot(
+    column="ndvi_mean",         # the field with zonal stats
+    ax=ax,
+    legend=True,                # show colorbar
+    cmap="YlGn",                # colormap (Yellow-Green)
+    edgecolor="black",          # outlines
+    linewidth=0.2,              # thin borders
+    missing_kwds={              # styling for missing data
+        "color": "lightgrey",
+        "label": "No Data"
+    }
+)
+
+# Add title and axes off
+ax.set_title("Benton County Tax Lots\nAverage NDVI by Parcel", fontsize=14)
+ax.axis("off")
+
+# Save the figure (optional)
+plt.savefig("ndvi_taxlots_map.png", dpi=300)
+plt.show()
 
 
 
